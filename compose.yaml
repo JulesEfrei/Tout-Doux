@@ -1,0 +1,10 @@
+services:
+  mysql:
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_DATABASE=toutdoux'
+      - 'MYSQL_PASSWORD=app'
+      - 'MYSQL_ROOT_PASSWORD=root'
+      - 'MYSQL_USER=app'
+    ports:
+      - '3306'
