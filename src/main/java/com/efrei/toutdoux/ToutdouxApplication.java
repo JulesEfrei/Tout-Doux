@@ -2,6 +2,8 @@ package com.efrei.toutdoux;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class ToutdouxApplication {
@@ -10,4 +12,8 @@ public class ToutdouxApplication {
 		SpringApplication.run(ToutdouxApplication.class, args);
 	}
 
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }
