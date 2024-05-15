@@ -27,9 +27,8 @@ public class TaskController {
         String username = principal.getName();
         User user = userService.findByUsername(username);
         List<Task> tasks = taskService.findByUser(user);
-        System.out.println(username);
         model.addAttribute("tasks", tasks);
-        model.addAttribute("user", username);
+        model.addAttribute("user", user);
         return "tasks";
     }
 

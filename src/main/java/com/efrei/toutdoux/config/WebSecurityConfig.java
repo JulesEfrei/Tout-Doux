@@ -15,14 +15,20 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/register", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/register", "/css/**", "/js/**", "/logout").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
+                        .defaultSuccessUrl("/tasks", true)
                 )
-                .logout(LogoutConfigurer::permitAll);
+                .logout(logout -> {
+                    logout.logoutUrl("/logout")
+                            .invalidateHttpSession(true)
+                            .deleteCookies("JSESSIONID")
+                            .logoutSuccessUrl("/login");
+                });
 
         return http.build();
     }
