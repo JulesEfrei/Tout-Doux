@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -33,8 +34,10 @@ public class TaskController {
     }
 
     @GetMapping("/new")
-    public String showTaskForm(Model model) {
+    public String showTaskForm(Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
         model.addAttribute("task", new Task());
+        model.addAttribute("user", user);
         return "task-form";
     }
 
@@ -48,9 +51,11 @@ public class TaskController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
+    public String showEditForm(@PathVariable Long id, Model model, Principal principal) {
         Task task = taskService.findById(id);
+        User user = userService.findByUsername(principal.getName());
         model.addAttribute("task", task);
+        model.addAttribute("user", user);
         return "task-form";
     }
 
@@ -59,6 +64,7 @@ public class TaskController {
         Task existingTask = taskService.findById(id);
         existingTask.setTitle(task.getTitle());
         existingTask.setDescription(task.getDescription());
+        existingTask.setUpdatedAt(LocalDateTime.now());
         taskService.save(existingTask);
         return "redirect:/tasks";
     }
