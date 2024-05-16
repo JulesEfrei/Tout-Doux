@@ -25,6 +25,7 @@
     <tr>
         <th scope="col">Title</th>
         <th scope="col">Description</th>
+        <th scope="col">State</th>
         <th scope="col">Due Date</th>
         <th scope="col">Last update</th>
         <th scope="col">Actions</th>
@@ -35,8 +36,8 @@
     <tr th:each="task : ${tasks}">
         <td th:text="${task.getTitle()}">Task Title</td>
         <td th:text="${task.getDescription()}" class="text-truncate" style="max-width: 20vw;">Task Description</td>
+        <td th:text="${task.getState()}" th:attr="class=${task.state == 'To Do' ? 'bg-warning' : (task.state == 'In Progress' ? 'bg-info' : (task.state == 'Done' ? 'bg-success text-white' : 'bg-danger'))}">State</td>
         <td th:text="${#temporals.format(task.getDueDate(), 'dd-MM-yyyy')}">Due Date</td>
-        <td th:text="${#temporals.format(task.getUpdatedAt(), 'dd-MM-yyyy')}">Task Last Update</td>
         <td th:text="${#temporals.format(task.getUpdatedAt(), 'dd-MM-yyyy HH:mm')}">Task Last Update</td>
         <td>
             <a th:href="@{/tasks/edit/{id}(id=${task.id})}">Edit</a>

@@ -12,6 +12,7 @@ public class Task {
     private Long id;
 
     private String title;
+    private String state;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -95,5 +96,13 @@ public class Task {
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
