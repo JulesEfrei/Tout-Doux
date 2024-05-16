@@ -126,8 +126,8 @@ Here is the roadmap of the project. Checked flags mean the features is out and u
 - [x] Log in
 - [x] Basic UI
 - [x] Docker ready
-- [ ] Error handling
-- [ ] Secure the application
+- [x] Error handling
+- [x] Secure the application
 
 See the [open issues](https://github.com/JulesEfrei/Tout-Doux/issues) for a full list of proposed features (and known issues).
 
