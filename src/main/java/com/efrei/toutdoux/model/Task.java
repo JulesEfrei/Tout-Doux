@@ -2,6 +2,7 @@ package com.efrei.toutdoux.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,6 +16,7 @@ public class Task {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    private LocalDate dueDate;
     private boolean completed;
 
     @ManyToOne
@@ -85,5 +87,13 @@ public class Task {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 }

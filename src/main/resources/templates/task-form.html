@@ -24,6 +24,8 @@
     <label for="description" class="form-label">Description</label>
     <textarea class="form-control" name="description" id="description" cols="50" rows="10"
               th:field="*{description}"></textarea><br/>
+    <label for="dueDate" class="form-label">Due Date</label>
+    <input type="date" class="form-control" id="dueDate" th:field="*{dueDate}" required="required"/><br/>
     <div class="d-flex align-items-end">
         <button type="submit" class="btn btn-primary">Save</button>
         <a href="/tasks" class="mx-3 text-secondary">Cancel</a>
