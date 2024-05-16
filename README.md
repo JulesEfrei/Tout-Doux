@@ -96,13 +96,9 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    git clone https://github.com/JulesEfrei/Tout-Doux.git
    ```
-2. Install dependencies
+2. Start the application with docker (the docker configuration is for development only -> Not recommended in production)
    ```sh
-   mvn install
-   ```
-3. Run the project
-    ```sh
-   mvn spring-boot:run
+   docker compose up -d
    ```
 3. Navigate to [localhost:8080](http://localhost:8080)
 
@@ -125,6 +121,7 @@ Here is the roadmap of the project. Checked flags mean the features is out and u
 - [x] Create an account
 - [x] Log in
 - [x] Basic UI
+- [x] Can't modify, read or delete task of another user
 - [x] Docker ready
 - [x] Error handling
 - [x] Secure the application
