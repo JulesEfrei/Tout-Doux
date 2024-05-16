@@ -13,6 +13,10 @@
 
 <h1 class="mb-3">Login</h1>
 
+<div th:if="${errorMessage}" class="alert alert-danger">
+    <p th:text="${errorMessage}" class="m-0"></p>
+</div>
+
 <form th:action="@{/login}" method="post">
     <label class="form-label" for="username">Username</label>
     <input type="text" class="form-control" id="username" name="username" required="required"/><br/>

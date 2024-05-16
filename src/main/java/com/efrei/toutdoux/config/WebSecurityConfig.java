@@ -20,6 +20,7 @@ public class WebSecurityConfig {
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
+                        .failureUrl("/login?error=true")
                         .permitAll()
                         .defaultSuccessUrl("/tasks", true)
                 )
