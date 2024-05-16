@@ -39,7 +39,7 @@ public class TaskController {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if (!task.getUser().equals(user)) {
-            return "403";
+            return "error/403";
         }
         model.addAttribute("task", task);
         return "task";
@@ -68,7 +68,7 @@ public class TaskController {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if (!task.getUser().equals(user)) {
-            return "error/403";
+            return "error/error/403";
         }
         model.addAttribute("task", task);
         return "task-form";
@@ -80,7 +80,7 @@ public class TaskController {
         User user = userService.findByUsername(principal.getName());
         if (!existingTask.getUser().equals(user)) {
             model.addAttribute("user", user);
-            return "403";
+            return "error/403";
         }
         existingTask.setTitle(task.getTitle());
         existingTask.setDescription(task.getDescription());
@@ -95,7 +95,7 @@ public class TaskController {
         User user = userService.findByUsername(principal.getName());
         if (!task.getUser().equals(user)) {
             model.addAttribute("user", user);
-            return "403";
+            return "error/403";
         }
         taskService.delete(id);
         return "redirect:/tasks";
