@@ -158,8 +158,10 @@ Don't forget to give the project a star! Thanks again!
 
 List of people
 
-* [Me](https://github.com/JulesEfrei)
-* [Romain](https://github.com/RoromainM)
+* [Jules Bruzeau](https://github.com/JulesEfrei)
+* [Romain Monmarche](https://github.com/RoromainM)
+* Younes Esslimani
+* Salah Ouni
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

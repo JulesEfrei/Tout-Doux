@@ -36,7 +36,10 @@
     <tr th:each="task : ${tasks}">
         <td th:text="${task.getTitle()}">Task Title</td>
         <td th:text="${task.getDescription()}" class="text-truncate" style="max-width: 20vw;">Task Description</td>
-        <td th:text="${task.getState()}" th:attr="class=${task.state == 'To Do' ? 'bg-warning' : (task.state == 'In Progress' ? 'bg-info' : (task.state == 'Done' ? 'bg-success text-white' : 'bg-danger'))}">State</td>
+        <td th:text="${task.getState()}"
+            th:attr="class=${task.state == 'To Do' ? 'bg-warning' : (task.state == 'In Progress' ? 'bg-info' : (task.state == 'Done' ? 'bg-success text-white' : 'bg-danger'))}">
+            State
+        </td>
         <td th:text="${#temporals.format(task.getDueDate(), 'dd-MM-yyyy')}">Due Date</td>
         <td th:text="${#temporals.format(task.getUpdatedAt(), 'dd-MM-yyyy HH:mm')}">Task Last Update</td>
         <td>
