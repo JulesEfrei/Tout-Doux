@@ -37,8 +37,11 @@ public class TaskController {
     public String showTask(@PathVariable Long id, Model model, Principal principal) {
         Task task = taskService.findById(id);
         User user = userService.findByUsername(principal.getName());
-        model.addAttribute("task", task);
         model.addAttribute("user", user);
+        if (!task.getUser().equals(user)) {
+            return "403";
+        }
+        model.addAttribute("task", task);
         return "task";
     }
 
@@ -63,14 +66,22 @@ public class TaskController {
     public String showEditForm(@PathVariable Long id, Model model, Principal principal) {
         Task task = taskService.findById(id);
         User user = userService.findByUsername(principal.getName());
-        model.addAttribute("task", task);
         model.addAttribute("user", user);
+        if (!task.getUser().equals(user)) {
+            return "error/403";
+        }
+        model.addAttribute("task", task);
         return "task-form";
     }
 
     @PostMapping("/update/{id}")
-    public String updateTask(@PathVariable Long id, @ModelAttribute Task task) {
+    public String updateTask(@PathVariable Long id, @ModelAttribute Task task, Model model, Principal principal) {
         Task existingTask = taskService.findById(id);
+        User user = userService.findByUsername(principal.getName());
+        if (!existingTask.getUser().equals(user)) {
+            model.addAttribute("user", user);
+            return "403";
+        }
         existingTask.setTitle(task.getTitle());
         existingTask.setDescription(task.getDescription());
         existingTask.setUpdatedAt(LocalDateTime.now());
@@ -79,7 +90,13 @@ public class TaskController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteTask(@PathVariable Long id) {
+    public String deleteTask(@PathVariable Long id, Model model, Principal principal) {
+        Task task = taskService.findById(id);
+        User user = userService.findByUsername(principal.getName());
+        if (!task.getUser().equals(user)) {
+            model.addAttribute("user", user);
+            return "403";
+        }
         taskService.delete(id);
         return "redirect:/tasks";
     }
