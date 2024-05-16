@@ -33,6 +33,15 @@ public class TaskController {
         return "tasks";
     }
 
+    @GetMapping("/{id}")
+    public String showTask(@PathVariable Long id, Model model, Principal principal) {
+        Task task = taskService.findById(id);
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("task", task);
+        model.addAttribute("user", user);
+        return "task";
+    }
+
     @GetMapping("/new")
     public String showTaskForm(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
