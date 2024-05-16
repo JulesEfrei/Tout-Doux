@@ -198,7 +198,7 @@ Distributed under the MIT License.
 [issues-shield]: https://img.shields.io/github/issues/JulesEfrei/Tout-Doux.svg?style=for-the-badge
 [issues-url]: https://github.com/JulesEfrei/Tout-Doux/issues
 [license-shield]: https://img.shields.io/github/license/JulesEfrei/Tout-Doux.svg?style=for-the-badge
-[license-url]: https://github.com/JulesEfrei/Tout-Doux/blob/master/LICENSE.txt
+[license-url]: https://github.com/JulesEfrei/Tout-Doux/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/jules-bruzeau/
 [product-screenshot]: images/screenshot.png
