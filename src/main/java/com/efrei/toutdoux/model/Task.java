@@ -17,12 +17,16 @@ public class Task {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private LocalDate dueDate;
+    private LocalDateTime dueDate;
     private boolean completed;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "board_id")
+    private Board board;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -31,6 +35,22 @@ public class Task {
     public Task() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     // Getters and setters
@@ -88,14 +108,6 @@ public class Task {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
     }
 
     public String getState() {

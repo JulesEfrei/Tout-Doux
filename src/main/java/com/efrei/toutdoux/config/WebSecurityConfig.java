@@ -22,7 +22,7 @@ public class WebSecurityConfig {
                         .loginPage("/login")
                         .failureUrl("/login?error=true")
                         .permitAll()
-                        .defaultSuccessUrl("/tasks", true)
+                        .defaultSuccessUrl("/boards", true)
                 )
                 .logout(logout -> {
                     logout.logoutUrl("/logout")

@@ -1,5 +1,6 @@
 package com.efrei.toutdoux.service;
 
+import com.efrei.toutdoux.model.Board;
 import com.efrei.toutdoux.model.Task;
 import com.efrei.toutdoux.model.User;
 import com.efrei.toutdoux.repository.TaskRepository;
@@ -17,6 +18,10 @@ public class TaskService {
 
     public List<Task> findByUser(User user) {
         return taskRepository.findByUser(user);
+    }
+
+    public List<Task> findByBoard(Board board) {
+        return taskRepository.findByBoard(board);
     }
 
     public Task findById(Long id) {
