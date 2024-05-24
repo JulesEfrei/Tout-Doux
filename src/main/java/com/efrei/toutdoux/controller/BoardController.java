@@ -43,6 +43,9 @@ public class BoardController {
     @GetMapping("/{id}")
     public String showBoard(@PathVariable Long id, Model model, Principal principal) {
         Board board = boardService.findById(id);
+        if (board == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         List<Task> tasks = taskService.findByBoard(board);
 
@@ -70,6 +73,9 @@ public class BoardController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model, Principal principal) {
         Board board = boardService.findById(id);
+        if (board == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if (!board.getUser().equals(user)) {
@@ -89,22 +95,12 @@ public class BoardController {
         return "redirect:/boards";
     }
 
-    @PostMapping("/update/{id}")
-    public String updateBoard(@PathVariable Long id, @ModelAttribute Board board, Model model, Principal principal) {
-        Board existingBoard = boardService.findById(id);
-        User user = userService.findByUsername(principal.getName());
-        if (!existingBoard.getUser().equals(user)) {
-            model.addAttribute("user", user);
-            return "error/403";
-        }
-        board.setId(id);
-        boardService.save(board);
-        return "redirect:/boards";
-    }
-
     @GetMapping("/delete/{id}")
     public String deleteBoard(@PathVariable Long id, Model model, Principal principal) {
         Board board = boardService.findById(id);
+        if (board == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if (!board.getUser().equals(user)) {
@@ -118,6 +114,9 @@ public class BoardController {
     @GetMapping("/{id}/new-state")
     public String addState(@PathVariable Long id, Model model, Principal principal) {
         Board board = boardService.findById(id);
+        if (board == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if (!board.getUser().equals(user)) {
@@ -131,6 +130,9 @@ public class BoardController {
     @PostMapping("/{id}/new-state")
     public String saveState(@PathVariable Long id, @ModelAttribute State state, Model model, Principal principal) {
         Board board = boardService.findById(id);
+        if (board == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         if (!board.getUser().equals(user)) {
             model.addAttribute("user", user);
@@ -145,6 +147,9 @@ public class BoardController {
     public String editState(@PathVariable Long id, @PathVariable Long stateId, Model model, Principal principal) {
         State state = stateService.findById(stateId);
         Board board = boardService.findById(id);
+        if (board == null || state == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if (!board.getUser().equals(user)) {
@@ -159,6 +164,9 @@ public class BoardController {
     @GetMapping("/{id}/new-task")
     public String addTask(@PathVariable Long id, Model model, Principal principal) {
         Board board = boardService.findById(id);
+        if (board == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         List<State> states = stateService.findByBoard(board);
         model.addAttribute("user", user);
@@ -174,6 +182,9 @@ public class BoardController {
     @PostMapping("/{id}/new-task")
     public String saveTask(@PathVariable Long id, @ModelAttribute Task task, Model model, Principal principal) {
         Board board = boardService.findById(id);
+        if (board == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         if (!board.getUser().equals(user)) {
             model.addAttribute("user", user);

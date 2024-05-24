@@ -15,7 +15,7 @@
 <h2 align="center">Tout Doux</h2>
 
   <p align="center">
-    Simple to-do application with authentication using Java Spring Boot and MySQL.
+    Simple Kanban application with authentication using Java Spring Boot and MySQL.
     <br />
     <!-- <a href="https://github.com/JulesEfrei/Tout-Doux"><strong>Explore the docs</strong></a> -->
     <br />
@@ -59,7 +59,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Simple To-do list application with authentication system.<br/>
+Simple Kanban list application with authentication system.<br/>
 This project is a school project linked to the Spring Boot module of 2 days. *The project will no longer be maintained.*
 
 * State of the Project --> **Beta**

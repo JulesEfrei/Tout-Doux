@@ -23,6 +23,9 @@ public class StateController {
     @GetMapping("/delete/{id}")
     public String deleteState(@PathVariable Long id, Model model, Principal principal) {
         State state = stateService.findById(id);
+        if(state == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         if (!state.getBoard().getUser().equals(user)) {
             model.addAttribute("user", user);

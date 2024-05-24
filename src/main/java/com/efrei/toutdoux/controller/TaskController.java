@@ -40,6 +40,9 @@ public class TaskController {
     @GetMapping("/{id}")
     public String showTask(@PathVariable Long id, Model model, Principal principal) {
         Task task = taskService.findById(id);
+        if (task == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if (!task.getUser().equals(user)) {
@@ -61,6 +64,9 @@ public class TaskController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model, Principal principal) {
         Task task = taskService.findById(id);
+        if (task == null) {
+            return "error/404";
+        }
         User user = userService.findByUsername(principal.getName());
         List<State> states = stateService.findByBoard(task.getBoard());
         model.addAttribute("user", user);
@@ -76,6 +82,9 @@ public class TaskController {
     @GetMapping("/delete/{id}")
     public String deleteTask(@PathVariable Long id, Model model, Principal principal) {
         Task task = taskService.findById(id);
+        if (task == null) {
+            return "error/404";
+        }
         String boardId = String.valueOf(task.getBoard().getId());
         User user = userService.findByUsername(principal.getName());
         if (!task.getUser().equals(user)) {
