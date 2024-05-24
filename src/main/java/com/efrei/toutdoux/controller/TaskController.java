@@ -1,7 +1,10 @@
 package com.efrei.toutdoux.controller;
 
+import com.efrei.toutdoux.model.State;
 import com.efrei.toutdoux.model.Task;
 import com.efrei.toutdoux.model.User;
+import com.efrei.toutdoux.service.BoardService;
+import com.efrei.toutdoux.service.StateService;
 import com.efrei.toutdoux.service.TaskService;
 import com.efrei.toutdoux.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -22,6 +24,8 @@ public class TaskController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private StateService stateService;
 
     @GetMapping
     public String listTasks(Model model, Principal principal) {
@@ -45,60 +49,41 @@ public class TaskController {
         return "task";
     }
 
-    @GetMapping("/new")
-    public String showTaskForm(Model model, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        model.addAttribute("task", new Task());
-        model.addAttribute("user", user);
-        return "task-form";
-    }
-
     @PostMapping
     public String saveTask(@ModelAttribute Task task, Principal principal) {
         String username = principal.getName();
         User user = userService.findByUsername(username);
         task.setUser(user);
         taskService.save(task);
-        return "redirect:/tasks";
+        return "redirect:/boards/" + task.getBoard().getId();
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model, Principal principal) {
         Task task = taskService.findById(id);
         User user = userService.findByUsername(principal.getName());
+        List<State> states = stateService.findByBoard(task.getBoard());
         model.addAttribute("user", user);
         if (!task.getUser().equals(user)) {
-            return "error/error/403";
-        }
-        model.addAttribute("task", task);
-        return "task-form";
-    }
-
-    @PostMapping("/update/{id}")
-    public String updateTask(@PathVariable Long id, @ModelAttribute Task task, Model model, Principal principal) {
-        Task existingTask = taskService.findById(id);
-        User user = userService.findByUsername(principal.getName());
-        if (!existingTask.getUser().equals(user)) {
-            model.addAttribute("user", user);
             return "error/403";
         }
-        existingTask.setTitle(task.getTitle());
-        existingTask.setDescription(task.getDescription());
-        existingTask.setUpdatedAt(LocalDateTime.now());
-        taskService.save(existingTask);
-        return "redirect:/tasks";
+        model.addAttribute("task", task);
+        model.addAttribute("board", task.getBoard());
+        model.addAttribute("states", states);
+        return "task-form";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteTask(@PathVariable Long id, Model model, Principal principal) {
         Task task = taskService.findById(id);
+        String boardId = String.valueOf(task.getBoard().getId());
         User user = userService.findByUsername(principal.getName());
         if (!task.getUser().equals(user)) {
             model.addAttribute("user", user);
             return "error/403";
         }
         taskService.delete(id);
-        return "redirect:/tasks";
+        return "redirect:/boards/" + boardId;
     }
 }
 

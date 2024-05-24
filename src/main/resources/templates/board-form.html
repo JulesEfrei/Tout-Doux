@@ -9,13 +9,13 @@
 
 <nav class="navbar mb-2">
     <div class="d-flex align-items-center gap-4">
-        <h2 class="navbar-brand m-0">Tout Doux</h2>
+        <h2 class="navbar-brand m-0"><a href="/boards" class="text-decoration-none text-black">Tout Doux</a></h2>
         <p th:text="'Connected as ' + ${user.getUsername()}" class="m-0 text-secondary"></p>
     </div>
     <a class="btn btn-outline-primary" href="/logout">Logout</a>
 </nav>
 
-<h1 class="mb-3">Task Form</h1>
+<h1 class="mb-3">Board Form</h1>
 
 <form th:action="@{/boards}" th:object="${board}" method="post">
     <input type="hidden" th:field="*{id}"/>
@@ -26,6 +26,27 @@
     <label for="description" class="form-label">Description</label>
     <textarea class="form-control" name="description" id="description" cols="50" rows="10"
               th:field="*{description}"></textarea><br/>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Color</th>
+            <th scope="col"><a th:href="@{/boards/{boardId}/new-state(boardId=${board.id})}">Add state</a></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="state : ${states}">
+            <td th:text="${state.getName()}">State Name</td>
+            <td th:text="${state.getColor()}" class="text-truncate" style="max-width: 20vw;">State Color</td>
+            <td>
+                <a th:href="@{/boards/{boardId}/state/{id}/edit(boardId=${board.id}, id=${state.id})}">Edit</a>
+                <a th:href="@{/states/delete/{id}(id=${state.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table><br/>
 
     <div class="d-flex align-items-end">
         <button type="submit" class="btn btn-primary">Save</button>

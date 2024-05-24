@@ -100,7 +100,8 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    docker compose up -d
    ```
-3. Navigate to [localhost:8080](http://localhost:8080)
+3. Wait a minute for the project to install correctly
+4. When the app is ready, navigate to [localhost:8080](http://localhost:8080)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -113,11 +114,25 @@ Here is the roadmap of the project. Checked flags mean the features is out and u
 - [x] Create entities
   - [x] User
   - [x] Task
+  - [x] Board
+  - [x] State
+  - [ ] Category
 - [x] CRUD on Task
   - [x] Create task
   - [x] Read all tasks of a user
+  - [x] Read all tasks of a board
   - [x] Modify task
   - [x] Delete task
+- [x] CRUD on Board
+  - [x] Create board
+  - [x] Read all boards of a user
+  - [x] Modify board
+  - [x] Delete board
+- [x] CRUD on State
+    - [x] Create state
+    - [x] Read all states of a board
+    - [x] Modify state
+    - [x] Delete state
 - [x] Create an account
 - [x] Log in
 - [x] Basic UI

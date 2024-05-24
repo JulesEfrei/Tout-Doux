@@ -12,13 +12,11 @@ public class Task {
     private Long id;
 
     private String title;
-    private String state;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private LocalDateTime dueDate;
-    private boolean completed;
+    private LocalDate dueDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -27,6 +25,10 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;
+
+    @ManyToOne
+    @JoinColumn(name = "state_id")
+    private State state;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -37,11 +39,11 @@ public class Task {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -78,14 +80,6 @@ public class Task {
         this.description = description;
     }
 
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
     public User getUser() {
         return user;
     }
@@ -110,11 +104,11 @@ public class Task {
         this.updatedAt = updatedAt;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(State state) {
         this.state = state;
     }
 }

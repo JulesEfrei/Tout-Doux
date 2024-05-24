@@ -9,7 +9,7 @@
 
 <nav class="navbar mb-2">
     <div class="d-flex align-items-center gap-4">
-        <h2 class="navbar-brand m-0">Tout Doux</h2>
+        <h2 class="navbar-brand m-0"><a href="/boards" class="text-decoration-none text-black">Tout Doux</a></h2>
         <p th:text="'Connected as ' + ${user.getUsername()}" class="m-0 text-secondary"></p>
     </div>
     <a class="btn btn-outline-primary" href="/logout">Logout</a>
@@ -19,28 +19,29 @@
 
 <form th:action="@{/tasks}" th:object="${task}" method="post">
     <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:name="board" th:value="${task.board != null ? task.board.id : board.id}"/>
 
     <label for="title" class="form-label">Title</label>
     <input type="text" class="form-control" id="title" th:field="*{title}" required="required"/><br/>
 
-    <label for="state" class="form-label">Sate</label>
-    <select id="state" name="state" class="form-select">
-        <option value="To Do" th:selected="${task.getState() == 'To Do'}">To Do</option>
-        <option value="In Progress" th:selected="${task.getState() == 'In Progress'}">In Progress</option>
-        <option value="Done" th:selected="${task.getState() == 'Done'}">Done</option>
-    </select><br/>
+    <div th:if="${states}">
+        <label for="state" class="form-label">State</label>
+        <select id="state" name="state" class="form-select">
+            <option th:each="state : ${states}" th:text="${state.getName()}" th:value="${state.getId()}"
+                    th:selected="${state == task.getState()}"></option>
+        </select><br/>
+    </div>
 
     <label for="description" class="form-label">Description</label>
     <textarea class="form-control" name="description" id="description" cols="50" rows="10"
               th:field="*{description}"></textarea><br/>
 
     <label for="dueDate" class="form-label">Due Date</label>
-    <p>aze</p>
-    <input type="date" class="form-control" id="dueDate" th:value="${{task.getDueDate()}}" th:field="*{dueDate}"/><br/>
+    <input type="date" class="form-control" id="dueDate" th:field="*{dueDate}"/><br/>
 
     <div class="d-flex align-items-end">
         <button type="submit" class="btn btn-primary">Save</button>
-        <a href="/tasks" class="mx-3 text-secondary">Cancel</a>
+        <a th:href="@{/boards/{boardId}(boardId=${task.getBoard() != null ? task.getBoard().getId() : board.getId()})}" class="mx-3 text-secondary">Cancel</a>
     </div>
 </form>
 

@@ -13,16 +13,47 @@
 
 <nav class="navbar mb-2">
     <div class="d-flex align-items-center gap-4">
-        <h2 class="navbar-brand m-0">Tout Doux</h2>
+        <h2 class="navbar-brand m-0"><a href="/boards" class="text-decoration-none text-black">Tout Doux</a></h2>
         <p th:text="'Connected as ' + ${user.getUsername()}" class="m-0 text-secondary"></p>
     </div>
     <a class="btn btn-outline-primary" href="/logout">Logout</a>
 </nav>
 
-<div class="container-fluid d-flex flex-column justify-content-between mb-3">
+<div class="container-fluid d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex flex-column">
     <h1 th:text="${board.getName()}"></h1>
     <p th:text="${board.getDescription()}"></p>
+    </div>
+    <a class="btn btn-outline-primary" th:href="@{/boards/{id}/new-task(id=${board.id})}">New task</a>
 </div>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">State</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Last update</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.getTitle()}">Task Title</td>
+        <td th:text="${task.getDescription()}" class="text-truncate" style="max-width: 20vw;">Task Description</td>
+        <td th:text="${task.getState()} ? ${task.getState().getName()} : 'N/A'" th:style="${task.getState()} ? ('background-color: ' + ${task.getState().getColor()}): ''">State Name</td>
+        <td th:text="${#temporals.format(task.getDueDate(), 'dd-MM-yyyy')}">Due Date</td>
+        <td th:text="${#temporals.format(task.getUpdatedAt(), 'dd-MM-yyyy HH:mm')}">Task Last Update</td>
+        <td>
+            <a th:href="@{/tasks/edit/{id}(id=${task.id})}">Edit</a>
+            <a th:href="@{/tasks/delete/{id}(id=${task.id})}">Delete</a>
+            <a th:href="@{/tasks/{id}(id=${task.id})}">View</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 <div class="my-3 d-flex align-items-end gap-3">
     <a class="btn btn-outline-primary" th:href="@{/boards/edit/{id}(id=${board.id})}">Edit board</a>
