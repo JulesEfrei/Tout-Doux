@@ -105,9 +105,9 @@ To get a local copy up and running follow these simple example steps.
    docker compose up -d
    ```
 4. Wait a minute for the project to install correctly (you can follow the process with the following command)
-  ```sh
-  docker compose logs app -f
-  ```
+   ```sh
+   docker compose logs app -f
+   ```
 5. When the app is ready, navigate to [localhost:8080](http://localhost:8080)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
