@@ -96,12 +96,19 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    git clone https://github.com/JulesEfrei/Tout-Doux.git
    ```
-2. Start the application with docker (the docker configuration is for development only -> Not recommended in production)
+2. Navigate to the project
+   ```sh
+   cd Tout-Doux/
+   ```
+3. Start the application with docker (the docker configuration is for development only -> Not recommended in production)
    ```sh
    docker compose up -d
    ```
-3. Wait a minute for the project to install correctly
-4. When the app is ready, navigate to [localhost:8080](http://localhost:8080)
+4. Wait a minute for the project to install correctly (you can follow the process with the following command)
+  ```sh
+  docker compose logs app -f
+  ```
+5. When the app is ready, navigate to [localhost:8080](http://localhost:8080)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
